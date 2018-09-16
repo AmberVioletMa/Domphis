@@ -5,7 +5,7 @@ page-add-device {
 
   .alert {
     padding: 20px;
-    background-color: #f44336;
+    background-color: rgb(194, 26, 144);
     color: white;
   }
 
@@ -35,7 +35,7 @@ page-add-device {
   .fileContainer {
     overflow: hidden;
     position: relative;
-    color: rgb(111, 235, 80);
+    color: rgb(194, 26, 144);
 }
 
 .fileContainer [type=file] {
@@ -52,10 +52,16 @@ page-add-device {
     top: 0;
 }
 .imgStyle{
-  object-fit: contain;
+  object-fit: cover;
   max-width: 90px;
   max-height: 90px;
   min-width: 90px;
   min-height: 90px;
+}
+.container {
+  width: 90px;
+  height: 90px;
+  background: white;
+  margin: 5px;
 }
 }

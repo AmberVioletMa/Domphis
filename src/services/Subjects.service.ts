@@ -5,5 +5,6 @@ import { Subject } from "rxjs/Subject";
 @Injectable()
 export class SubjectService {
   public DevicesSubject = new Subject();
+  public TopicSubject = new Subject<any>();
 
 }

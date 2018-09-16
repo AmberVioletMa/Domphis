@@ -11,7 +11,7 @@ import { SubjectService } from '../../services/Subjects.service';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  ListaDeDispositivos;
+  ListaDeDispositivos:any;
   constructor(
     public navCtrl: NavController,
     private MQTT:MQTTService,
@@ -25,14 +25,16 @@ export class ListPage {
     this.storage.get('Dispositivos').then((val) => {
       const result = val;
       this._SubjectService.DevicesSubject.next(result);
+      this._SubjectService.TopicSubject.next(result);
     });
     this._SubjectService.DevicesSubject.subscribe(val => {
       this.ListaDeDispositivos = val;
+      this.MQTT.reConnect();
     });
   }
   changeState(Topic,Dispositivo){
     Dispositivo.State = !Dispositivo.State;
-    this.MQTT.SendMenssage(Topic + ',' + Dispositivo.ID + ',' + Dispositivo.State);
+    this.MQTT.SendMenssage(Topic, Dispositivo.ID + ',' + Dispositivo.State);
   }
 
   openModal() {

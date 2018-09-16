@@ -15,15 +15,25 @@
 <ion-content>
   <ion-list>
     <div *ngFor='let Group of ListaDeDispositivos'>
-      <label>{{Group.GroupName}}</label>
-      <div *ngFor='let Dispositivo of Group.Dispositivos'>
-      <img class='imgStyle' [src]=Dispositivo.Img>{{Dispositivo.Name}},
-      <span *ngIf=Dispositivo.State>Prendido</span>
-      <span *ngIf=!Dispositivo.State>Apagado</span>
-      <label class="switch">
-          <input type="checkbox" (click)='changeState(Group.TopicID,Dispositivo)'>
-          <span class="slider round"></span>
-        </label>
+      <div class='DeviceTitle'>
+        <label class='DeviceTitleLabel' style='padding-left: 10px;'>{{Group.GroupName}} <ion-icon style="float: right;padding-right: 10px;padding-top: 13px;"
+            name="more"></ion-icon></label>
+      </div>
+      <div *ngFor='let Dispositivo of Group.Dispositivos' class='DevicesDiv'>
+        <div class='imgDiv'>
+          <div class='container'><img class='imgStyle' [src]=Dispositivo.Img></div>
+        </div>
+        <div class='textDiv'>
+          <label style='font-size: 17px;'>{{Dispositivo.Name}}</label><br>
+          <span style='font-size: 10px; color: rgb(255, 116, 241);' *ngIf=Dispositivo.State>Prendido</span>
+          <span style='font-size: 10px; color: gray;'*ngIf=!Dispositivo.State>Apagado</span>
+        </div>
+        <div class='sliderDiv'>
+          <label class="switch">
+            <input type="checkbox" (click)='changeState(Group.TopicID,Dispositivo)'>
+            <span class="slider round"></span>
+          </label>
+        </div>
       </div>
     </div>
   </ion-list>

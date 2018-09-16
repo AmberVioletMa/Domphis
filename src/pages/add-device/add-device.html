@@ -20,7 +20,7 @@
         <p *ngIf="TopicIDIsInvalid" class="alert">The field is required</p>
       </div>
       <div class="form-group Box">
-        <div><img [src]="Device1img" class='imgStyle'></div>
+        <div class='container'><img [src]="Device1img" class='imgStyle'></div>
         <div>
           <label class="TextLabel">Device Name:</label>
           <label class="fileContainer">
@@ -32,7 +32,7 @@
       </div>
       <p *ngIf="Device1IsInvalid" class="alert">The Device must have a Name</p>
       <div class="form-group Box">
-        <div><img [src]="Device2img" class='imgStyle'></div>
+        <div class='container'><img [src]="Device2img" class='imgStyle'></div>
         <div>
           <label class="TextLabel">Device Name:</label>
           <label class="fileContainer">
@@ -44,7 +44,7 @@
       </div>
       <p *ngIf="Device2IsInvalid" class="alert">The Device must have a Name</p>
     <div class="form-group Box">
-      <div><img [src]="Device3img" class='imgStyle'></div>
+      <div class='container'><img [src]="Device3img" class='imgStyle'></div>
       <div>
         <label class="TextLabel">Device Name:</label>
         <label class="fileContainer">
@@ -56,7 +56,7 @@
     </div>
     <p *ngIf="Device3IsInvalid" class="alert">The Device must have a Name</p>
       <div class="form-group Box">
-        <div><img [src]="Device4img" class='imgStyle'></div>
+        <div class='container'><img [src]="Device4img" class='imgStyle'></div>
         <div>
           <label class="TextLabel">Device Name:</label>
           <label class="fileContainer">
@@ -68,7 +68,7 @@
       </div>
       <p *ngIf="Device4IsInvalid" class="alert">The Device must have a Name</p>
         <div class="form-group Box">
-          <div><img [src]="Device5img" class='imgStyle'></div>
+          <div class='container'><img [src]="Device5img" class='imgStyle'></div>
           <div>
             <label class="TextLabel">Device Name:</label>
             <label class="fileContainer">
@@ -80,7 +80,7 @@
         </div>
         <p *ngIf="Device5IsInvalid" class="alert">The Device must have a Name</p>
           <div class="form-group Box">
-              <div><img [src]="Device6img" class='imgStyle'></div>
+              <div class='container'><img [src]="Device6img" class='imgStyle'></div>
               <div>
                 <label class="TextLabel">Device Name:</label>
                 <label class="fileContainer">
@@ -91,6 +91,6 @@
               </div>
             </div>
             <p *ngIf="Device6IsInvalid" class="alert">The Device must have a Name</p>
-            <button ion-button full (click)='saveDevice();' [disabled]='!Complete'>Add Device</button>
+            <button ion-button full color='Violet' (click)='saveDevice();' [disabled]='!Complete'>Add Device</button>
   </form>
 </ion-content>

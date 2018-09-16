@@ -12,18 +12,12 @@ import { SubjectService } from "../../services/Subjects.service";
 export class AddDevicePage {
   formDevice: FormGroup;
   ListD = [];
-  Device1img =
-    "https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216";
-  Device2img =
-    "https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216";
-  Device3img =
-    "https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216";
-  Device4img =
-    "https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216";
-  Device5img =
-    "https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216";
-  Device6img =
-    "https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216";
+  Device1img = "assets/imgs/NOIMG.png";
+  Device2img = "assets/imgs/NOIMG.png";
+  Device3img = "assets/imgs/NOIMG.png";
+  Device4img = "assets/imgs/NOIMG.png";
+  Device5img = "assets/imgs/NOIMG.png";
+  Device6img = "assets/imgs/NOIMG.png";
 
   constructor(
     public navCtrl: NavController,
@@ -130,7 +124,7 @@ export class AddDevicePage {
   saveDevice() {
     const FormaSub = {
       GroupName: this.formDevice.get("GroupName").value,
-      TokenID: this.formDevice.get("TopicID").value,
+      TopicID: this.formDevice.get("TopicID").value,
       Dispositivos: [
         {
           Name: this.formDevice.get("Device1").value,

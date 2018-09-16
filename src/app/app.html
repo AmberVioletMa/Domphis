@@ -6,10 +6,10 @@
   </ion-header>
 
   <ion-content>
+      <img class='Icon' src='assets/imgs/Icon.png' style='width: 200px;margin-top: 10px;'>
     <ion-list>
-        <img class='Icon' src='https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216'>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)" style='display: inline-block;'>
-        <img class='RootIMG' src='https://matematicasparaticharito.files.wordpress.com/2015/02/cuadrado.png?w=217&h=216'>
+        <img class='RootIMG' [src]=p.img>
         <div class='RootTitle'>{{p.title}}</div>
       </button>
     </ion-list>

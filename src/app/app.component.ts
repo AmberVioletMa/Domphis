@@ -17,7 +17,7 @@ export class MyApp {
 
   rootPage: any = ListPage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, component: any, img: string}>;
 
   constructor(
     public platform: Platform,
@@ -29,8 +29,8 @@ export class MyApp {
     this.createDatabase();
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'dispositives', component: ListPage },
-      { title: 'Moods', component: HomePage }
+      { title: 'Dispositives', component: ListPage, img: 'assets/imgs/LightsIcon.png'  },
+      { title: 'Moods', component: HomePage, img: 'assets/imgs/MoodsIcon.png' }
     ];
 
   }
