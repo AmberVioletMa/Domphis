@@ -11,7 +11,7 @@ import { SubjectService } from '../../services/Subjects.service';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  ListaDeDispositivos=[];
+  ListaDeDispositivos;
   constructor(
     public navCtrl: NavController,
     private MQTT:MQTTService,
