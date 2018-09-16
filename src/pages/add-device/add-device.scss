@@ -1,0 +1,61 @@
+page-add-device {
+  .forma{
+    display: block;
+  }
+
+  .alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+  }
+
+  .InputGrande {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
+  .TextLabel {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+  .Box{
+    width: 100%;
+    display: flex;
+    padding-top: 5px;
+  }
+  .Box :nth-child(1){
+    width: 98px;
+  }
+  .Box :nth-child(2){
+    width: 90%;
+    padding-left: 10px;
+  }
+  .fileContainer {
+    overflow: hidden;
+    position: relative;
+    color: rgb(111, 235, 80);
+}
+
+.fileContainer [type=file] {
+    cursor: inherit;
+    display: block;
+    padding-bottom: 2px;
+    filter: alpha(opacity=0);
+    min-height: 100%;
+    min-width: 100%;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    text-align: right;
+    top: 0;
+}
+.imgStyle{
+  object-fit: contain;
+  max-width: 90px;
+  max-height: 90px;
+  min-width: 90px;
+  min-height: 90px;
+}
+}

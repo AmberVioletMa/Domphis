@@ -5,7 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
-import { MQTTService } from '../services/MQTT.service';
+import {SQLite, SQLiteObject} from '@ionic-native/sqlite';
+import { SQLiteService } from '../services/SQLite.service';
+
 
 @Component({
   templateUrl: 'app.html'
@@ -17,9 +19,14 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(
+    public platform: Platform,
+    public statusBar: StatusBar,
+    public splashScreen: SplashScreen,
+    public sqlite: SQLite,
+    public _SQLiteService: SQLiteService) {
     this.initializeApp();
-
+    this.createDatabase();
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'dispositives', component: ListPage },
@@ -34,6 +41,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.createDatabase();
     });
   }
 
@@ -42,4 +50,19 @@ export class MyApp {
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
   }
+
+  private createDatabase(){
+    this.sqlite.create({
+      name: 'data.db',
+      location: 'default' // the location field is required
+    })
+    .then((db: SQLiteObject) => {
+      this._SQLiteService.setDatabase(db);
+      return this._SQLiteService.createTable();
+    })
+    .catch(error =>{
+      console.error(error);
+    });
+  }
+
 }

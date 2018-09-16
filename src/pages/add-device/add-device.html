@@ -1,0 +1,96 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>AddDevice</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form [formGroup]="formDevice">
+    <div class="form-group">
+      <label class="TextLabel">Group Name:</label><br>
+      <input class="form-control InputGrande" type="text" formControlName="GroupName">
+      <p *ngIf="GroupNameIsInvalid" class="alert">The field is required</p>
+    </div>
+    <div class="form-group">
+        <label class="TextLabel">Topic ID:</label><br>
+        <input class="form-control InputGrande" type="text" formControlName="TopicID">
+        <p *ngIf="TopicIDIsInvalid" class="alert">The field is required</p>
+      </div>
+      <div class="form-group Box">
+        <div><img [src]="Device1img" class='imgStyle'></div>
+        <div>
+          <label class="TextLabel">Device Name:</label>
+          <label class="fileContainer">
+            Upload a Photo!
+          <input type="file" (change)="takePhoto($event,'Device1img')" formControlName="Device1IMG" />
+          </label>
+          <input class="form-control InputGrande" type="text" formControlName="Device1">
+        </div>
+      </div>
+      <p *ngIf="Device1IsInvalid" class="alert">The Device must have a Name</p>
+      <div class="form-group Box">
+        <div><img [src]="Device2img" class='imgStyle'></div>
+        <div>
+          <label class="TextLabel">Device Name:</label>
+          <label class="fileContainer">
+            Upload a Photo!
+          <input type="file" (change)="takePhoto($event,'Device2img')" formControlName="Device2IMG" />
+          </label>
+          <input class="form-control InputGrande" type="text" formControlName="Device2">
+        </div>
+      </div>
+      <p *ngIf="Device2IsInvalid" class="alert">The Device must have a Name</p>
+    <div class="form-group Box">
+      <div><img [src]="Device3img" class='imgStyle'></div>
+      <div>
+        <label class="TextLabel">Device Name:</label>
+        <label class="fileContainer">
+          Upload a Photo!
+        <input type="file" (change)="takePhoto($event,'Device3img')" formControlName="Device3IMG" />
+        </label>
+        <input class="form-control InputGrande" type="text" formControlName="Device3">
+      </div>
+    </div>
+    <p *ngIf="Device3IsInvalid" class="alert">The Device must have a Name</p>
+      <div class="form-group Box">
+        <div><img [src]="Device4img" class='imgStyle'></div>
+        <div>
+          <label class="TextLabel">Device Name:</label>
+          <label class="fileContainer">
+            Upload a Photo!
+          <input type="file" (change)="takePhoto($event,'Device4img')" formControlName="Device4IMG" />
+          </label>
+          <input class="form-control InputGrande" type="text" formControlName="Device4">
+        </div>
+      </div>
+      <p *ngIf="Device4IsInvalid" class="alert">The Device must have a Name</p>
+        <div class="form-group Box">
+          <div><img [src]="Device5img" class='imgStyle'></div>
+          <div>
+            <label class="TextLabel">Device Name:</label>
+            <label class="fileContainer">
+              Upload a Photo!
+            <input type="file" (change)="takePhoto($event,'Device5img')" formControlName="Device5IMG" />
+            </label>
+            <input class="form-control InputGrande" type="text" formControlName="Device5">
+          </div>
+        </div>
+        <p *ngIf="Device5IsInvalid" class="alert">The Device must have a Name</p>
+          <div class="form-group Box">
+              <div><img [src]="Device6img" class='imgStyle'></div>
+              <div>
+                <label class="TextLabel">Device Name:</label>
+                <label class="fileContainer">
+                  Upload a Photo!
+                <input type="file" (change)="takePhoto($event,'Device6img')" formControlName="Device6IMG" />
+                </label>
+                <input class="form-control InputGrande" type="text" formControlName="Device6">
+              </div>
+            </div>
+            <p *ngIf="Device6IsInvalid" class="alert">The Device must have a Name</p>
+            <button ion-button full (click)='saveDevice();' [disabled]='!Complete'>Add Device</button>
+  </form>
+</ion-content>

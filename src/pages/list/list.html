@@ -3,21 +3,28 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>List</ion-title>
+    <ion-title>Dispositivos</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="openModal()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
+    <div *ngFor='let Group of ListaDeDispositivos'>
+      <label>{{Group.GroupName}}</label>
+      <div *ngFor='let Dispositivo of Group.Dispositivos'>
+      <img class='imgStyle' [src]=Dispositivo.Img>{{Dispositivo.Name}},
+      <span *ngIf=Dispositivo.State>Prendido</span>
+      <span *ngIf=!Dispositivo.State>Apagado</span>
+      <label class="switch">
+          <input type="checkbox" (click)='changeState(Group.TopicID,Dispositivo)'>
+          <span class="slider round"></span>
+        </label>
       </div>
-    </button>
+    </div>
   </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
 </ion-content>
