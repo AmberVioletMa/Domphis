@@ -6,5 +6,6 @@ import { Subject } from "rxjs/Subject";
 export class SubjectService {
   public DevicesSubject = new Subject();
   public TopicSubject = new Subject<any>();
+  public topics=[];
 
 }

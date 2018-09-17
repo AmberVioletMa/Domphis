@@ -29,7 +29,7 @@ export class MyApp {
     this.createDatabase();
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Dispositives', component: ListPage, img: 'assets/imgs/LightsIcon.png'  },
+      { title: 'Devices', component: ListPage, img: 'assets/imgs/LightsIcon.png'  },
       { title: 'Moods', component: HomePage, img: 'assets/imgs/MoodsIcon.png' }
     ];
 

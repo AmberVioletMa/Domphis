@@ -14,25 +14,34 @@ export class MQTTService  {
 };
 
   public constructor( private _SubjectService:SubjectService ) {
-    // Create a client instance
-    this.client = new Paho.MQTT.Client("broker.mqttdashboard.com", Number(8000), "/mqtt", "clientId");
+    this.onInitVoid();
+  }
 
-    // set callback handlers
-    this.client.onConnectionLost = this.onConnectionLost;
-    this.client.onMessageArrived = this.onMessageArrived;
+  private onInitVoid(){
+        // Create a client instance
+        this.client = new Paho.MQTT.Client("broker.mqttdashboard.com", Number(8000), "/mqtt", "clientId");
 
-    // connect the client
-    this.client.connect({onSuccess:this.onConnect.bind(this)});
+        // set callback handlers
+        this.client.onConnectionLost = this.onConnectionLost;
+        this.client.onMessageArrived = this.onMessageArrived;
+
+        // connect the client
+        this.client.connect({onSuccess:this.onConnect.bind(this)});
+
+        this._SubjectService.TopicSubject.subscribe(val => {
+          this._SubjectService.topics =[];
+          for( let topic of val){
+            this._SubjectService.topics.push(topic.TopicID);
+            }
+        });
   }
 
   private onConnect() {
     console.log("Connected");
     // Once a connection has been made, make a subscription and send a message.
-    this._SubjectService.TopicSubject.subscribe(val => {
-      for( let topic of val){
-        this.client.subscribe(topic.TopicID,this.subscribeOptions);
-      }
-    });
+    for(let topic of this._SubjectService.topics){
+      this.client.subscribe(topic,this.subscribeOptions);
+    }
   }
 
   // called when the client loses its connection
@@ -61,15 +70,7 @@ export class MQTTService  {
 
   public reConnect(){
     this.client.disconnect();
-        // Create a client instance
-        this.client = new Paho.MQTT.Client("broker.mqttdashboard.com", Number(8000), "/mqtt", "clientId");
-
-        // set callback handlers
-        this.client.onConnectionLost = this.onConnectionLost;
-        this.client.onMessageArrived = this.onMessageArrived;
-
-        // connect the client
-        this.client.connect({onSuccess:this.onConnect.bind(this)});
+    this.onInitVoid();
   }
 
 }
