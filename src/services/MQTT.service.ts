@@ -24,7 +24,7 @@ export class MQTTService  {
 
         // set callback handlers
         this.client.onConnectionLost = this.onConnectionLost.bind(this);
-        this.client.onMessageArrived = this.onMessageArrived;
+        this.client.onMessageArrived = this.onMessageArrived.bind(this);
 
         // connect the client
         this.client.connect({onSuccess:this.onConnect.bind(this)});
@@ -44,6 +44,7 @@ export class MQTTService  {
     // Once a connection has been made, make a subscription and send a message.
     for(let topic of this._SubjectService.topics){
       this.client.subscribe(topic,this.subscribeOptions);
+      this.SendMenssage(topic,"UpdatePlease");
     }
   }
 
@@ -57,6 +58,21 @@ export class MQTTService  {
   // called when a message arrives
   private onMessageArrived(message) {
     console.log("MessageArrived:"+message.payloadString);
+    let Tokens = message.payloadString.split(",");
+    if(Tokens[0] === 'UpdateDevices'){
+      // UpdateDevices,AmberTopicRoomTopic92,0,0,1,0,1,0
+      this._SubjectService.Devices = this._SubjectService.Devices.map( Device => {
+        if(Device.TopicID === Tokens[1]){
+          Device.Dispositivos[0].State = (Tokens[2] === '1');
+          Device.Dispositivos[1].State = (Tokens[3] === '1');
+          Device.Dispositivos[2].State = (Tokens[4] === '1');
+          Device.Dispositivos[3].State = (Tokens[5] === '1');
+          Device.Dispositivos[4].State = (Tokens[6] === '1');
+          Device.Dispositivos[5].State = (Tokens[7] === '1');
+        }
+        return Device;
+      });
+    }
   }
 
   private onSuccessCallback() { console.log('Success on the Subscribe');}

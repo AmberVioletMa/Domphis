@@ -9,7 +9,7 @@ import {
 import { MQTTService } from "../../services/MQTT.service";
 import { SubjectService } from "../../services/Subjects.service";
 import { Storage } from "@ionic/storage";
-import { AddDevicePage } from '../../pages/add-device/add-device';
+import { AddDevicePage } from "../../pages/add-device/add-device";
 
 @Component({
   selector: "popover",
@@ -35,8 +35,10 @@ export class PopoverComponent {
 
   Edit() {
     let Device = this.navParams.get("Device");
-    let index = this.navParams.get('index');
-    this.appCtrl.getRootNav().push(AddDevicePage,{Device:Device,index:index});
+    let index = this.navParams.get("index");
+    this.appCtrl
+      .getRootNav()
+      .push(AddDevicePage, { Device: Device, index: index });
     try {
       this.viewCtrl.dismiss();
     } catch {}
@@ -149,15 +151,19 @@ export class PopoverComponent {
                 if (Device.GroupName === Devicess.GroupName) {
                   Devicess.Dispositivos = Devicess.Dispositivos.map(
                     Dispositivo => {
-                      for (let ID of data) {
-                        if (Dispositivo.ID === ID) {
-                          Dispositivo.Hide = true;
-                          break;
-                        } else {
-                          Dispositivo.Hide = false;
+                      if (data.length !== 0) {
+                        for (let ID of data) {
+                          if (Dispositivo.ID === ID) {
+                            Dispositivo.Hide = true;
+                            break;
+                          } else {
+                            Dispositivo.Hide = false;
+                          }
                         }
+                      } else {
+                        Dispositivo.Hide = false;
                       }
-                      return Dispositivo;
+                        return Dispositivo;
                     }
                   );
                 }

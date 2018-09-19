@@ -31,7 +31,7 @@
           </div>
           <div class='sliderDiv'>
             <label class="switch">
-              <input type="checkbox" (click)='changeState(Group.TopicID,Dispositivo)'>
+              <input type="checkbox" [checked]=Dispositivo.State (click)='changeState(Group.TopicID,Dispositivo)'>
               <span class="slider round"></span>
             </label>
           </div>
