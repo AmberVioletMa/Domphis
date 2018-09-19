@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
+import { PopoverComponent } from './popover/popover';
 @NgModule({
-	declarations: [],
+	declarations: [PopoverComponent],
 	imports: [],
-	exports: []
+	exports: [PopoverComponent]
 })
 export class ComponentsModule {}

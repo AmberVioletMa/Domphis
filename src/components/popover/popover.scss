@@ -1,0 +1,19 @@
+popover {
+  .btn-group button {
+    background-color: rgb(255, 116, 241);;
+    border: 1px solid rgb(216, 36, 198);;
+    color: white;
+    padding: 10px 24px;
+    cursor: pointer;
+    width: 100%;
+    display: block;
+}
+
+.btn-group button:not(:last-child) {
+    border-bottom: none;
+}
+
+.btn-group button:hover {
+    background-color: rgb(167, 20, 152);;
+}
+}

@@ -43,6 +43,34 @@ export class AddDevicePage {
       Device6: ["", Validators.required],
       Device6IMG: [""]
     });
+    if(this._SubjectService.Devices){this.ListD = this._SubjectService.Devices;}
+    else this.ListD=[];
+    let DeviceParam = this.navParams.get("Device");
+    if(DeviceParam){
+      this.formDevice.setValue({
+      GroupName: DeviceParam.GroupName,
+      TopicID: DeviceParam.TopicID,
+      Device1: DeviceParam.Dispositivos[0].Name,
+      Device1IMG: '',
+      Device2: DeviceParam.Dispositivos[1].Name,
+      Device2IMG: '',
+      Device3: DeviceParam.Dispositivos[2].Name,
+      Device3IMG: '',
+      Device4: DeviceParam.Dispositivos[3].Name,
+      Device4IMG: '',
+      Device5: DeviceParam.Dispositivos[3].Name,
+      Device5IMG: '',
+      Device6: DeviceParam.Dispositivos[3].Name,
+      Device6IMG: '',
+      });
+      this.Device1img = DeviceParam.Dispositivos[0].Img;
+      this.Device2img = DeviceParam.Dispositivos[1].Img;
+      this.Device3img = DeviceParam.Dispositivos[2].Img;
+      this.Device4img = DeviceParam.Dispositivos[3].Img;
+      this.Device5img = DeviceParam.Dispositivos[4].Img;
+      this.Device6img = DeviceParam.Dispositivos[5].Img;
+    }
+    console.log(this.ListD);
   }
 
   ionViewDidLoad() {
@@ -104,7 +132,7 @@ export class AddDevicePage {
     return this.formDevice.valid;
   }
 
-  takePhoto(event, SOURCE) {
+  SelectPhoto(event, SOURCE) {
     let files = event.target.files;
     let file = files[0];
 
@@ -130,41 +158,54 @@ export class AddDevicePage {
           Name: this.formDevice.get("Device1").value,
           Img: this.Device1img ? this.Device1img : '',
           ID: "Device1",
-          State:false
+          State:false,
+          Hide:false
         },
         {
           Name: this.formDevice.get("Device2").value,
           Img: this.Device2img ? this.Device2img : '',
           ID: "Device2",
-          State:false
+          State:false,
+          Hide:false
         },
         {
           Name: this.formDevice.get("Device3").value,
           Img: this.Device3img ? this.Device3img : '',
           ID: "Device3",
-          State:false
+          State:false,
+          Hide:false
         },
         {
           Name: this.formDevice.get("Device4").value,
           Img: this.Device4img ? this.Device4img : '' ,
           ID: "Device4",
-          State:false
+          State:false,
+          Hide:false
         },
         {
           Name: this.formDevice.get("Device5").value,
           Img: this.Device5img ? this.Device5img : '',
           ID: "Device5",
-          State:false
+          State:false,
+          Hide:false
         },
         {
           Name: this.formDevice.get("Device6").value,
           Img: this.Device6img ? this.Device6img : '',
           ID: "Device6",
-          State:false
+          State:false,
+          Hide:false
         }
       ]
     };
+    let DeviceParam = this.navParams.get("Device");
+    if(!DeviceParam){
     this.ListD.push(FormaSub);
+    }
+    else{
+      let index= this.navParams.get("index");
+      this.ListD[index]= FormaSub;
+    }
     this.storage.set("Dispositivos", this.ListD);
     this._SubjectService.DevicesSubject.next(this.ListD);
     this.appCtrl.getRootNav().pop();

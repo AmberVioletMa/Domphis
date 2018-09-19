@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from "@angular/core";
 import {Paho} from 'ng2-mqtt/mqttws31';
 import { SubjectService } from "./Subjects.service";
+import { AlertController } from 'ionic-angular';
 
 @Injectable()
 export class MQTTService  {
@@ -13,7 +14,7 @@ export class MQTTService  {
     timeout: 10
 };
 
-  public constructor( private _SubjectService:SubjectService ) {
+  public constructor( private _SubjectService:SubjectService, private alertCtrl: AlertController ) {
     this.onInitVoid();
   }
 
@@ -22,7 +23,7 @@ export class MQTTService  {
         this.client = new Paho.MQTT.Client("broker.mqttdashboard.com", Number(8000), "/mqtt", "clientId");
 
         // set callback handlers
-        this.client.onConnectionLost = this.onConnectionLost;
+        this.client.onConnectionLost = this.onConnectionLost.bind(this);
         this.client.onMessageArrived = this.onMessageArrived;
 
         // connect the client
@@ -30,9 +31,11 @@ export class MQTTService  {
 
         this._SubjectService.TopicSubject.subscribe(val => {
           this._SubjectService.topics =[];
+          if(val){
           for( let topic of val){
             this._SubjectService.topics.push(topic.TopicID);
             }
+          }
         });
   }
 
@@ -57,7 +60,7 @@ export class MQTTService  {
   }
 
   private onSuccessCallback() { console.log('Success on the Subscribe');}
-  private onFailureCallback() { console.log('Failure on the Subscribe');}
+  private onFailureCallback() { console.log('Failure on the Subscribe');this.ConnectionLoseAlert();}
 
   public SendMenssage(Topic,Mensaje){
     // Publish a Message
@@ -65,7 +68,8 @@ export class MQTTService  {
     message.destinationName = Topic;
     message.qos = 2;
 
-    this.client.send(message);
+    try{this.client.send(message);}
+    catch {this.ConnectionLoseAlert();}
   }
 
   public reConnect(){
@@ -73,4 +77,30 @@ export class MQTTService  {
     this.onInitVoid();
   }
 
+  public reConnectWhenClose(){
+    this.onInitVoid();
+  }
+
+  public ConnectionLoseAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Lose Connection',
+      message: 'The server lose connection, please try to re-connet',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 're-connect',
+          handler: () => {
+            this.onInitVoid();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
 }

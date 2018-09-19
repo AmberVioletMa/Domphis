@@ -5,6 +5,8 @@ import { AddDevicePage } from '../add-device/add-device';
 import { SQLiteService } from '../../services/SQLite.service';
 import { Storage } from '@ionic/storage';
 import { SubjectService } from '../../services/Subjects.service';
+import { PopoverController } from 'ionic-angular';
+import { PopoverComponent } from '../../components/popover/popover';
 
 @Component({
   selector: 'page-list',
@@ -20,7 +22,8 @@ export class ListPage {
     public appCtrl: App,
     public SQLService: SQLiteService,
     private storage:Storage,
-    private _SubjectService:SubjectService
+    private _SubjectService:SubjectService,
+    public popoverCtrl: PopoverController
   ) {
     this.storage.get('Dispositivos').then((val) => {
       const result = val;
@@ -29,6 +32,7 @@ export class ListPage {
     });
     this._SubjectService.DevicesSubject.subscribe(val => {
       this.ListaDeDispositivos = val;
+      this._SubjectService.Devices = val;
       this.MQTT.reConnect();
     });
   }
@@ -40,4 +44,12 @@ export class ListPage {
   openModal() {
     this.appCtrl.getRootNav().push(AddDevicePage);
   }
+
+  presentPopover(myEvent,data) {
+    let popover = this.popoverCtrl.create(PopoverComponent, data);
+    popover.present({
+      ev: myEvent
+    });
+  }
+
 }

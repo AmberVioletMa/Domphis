@@ -19,12 +19,15 @@ import { ImagePicker } from '@ionic-native/image-picker';
 import { Camera } from "@ionic-native/camera";
 import { File } from '@ionic-native/file';
 
+import { PopoverComponent } from '../components/popover/popover'
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     ListPage,
-    AddDevicePage
+    AddDevicePage,
+    PopoverComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { File } from '@ionic-native/file';
     MyApp,
     HomePage,
     ListPage,
-    AddDevicePage
+    AddDevicePage,
+    PopoverComponent
   ],
   providers: [
     StatusBar,
