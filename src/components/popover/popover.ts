@@ -82,6 +82,8 @@ export class PopoverComponent {
             }
             console.log(this._SubjectService.Devices);
             this.storage.set("Dispositivos", this._SubjectService.Devices);
+            this._SubjectService.TopicSubject.next(this._SubjectService.Devices);
+            this._SubjectService.DevicesSubject.next(this._SubjectService.Devices);
             try {
               this.viewCtrl.dismiss();
             } catch {}

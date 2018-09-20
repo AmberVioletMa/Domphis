@@ -208,6 +208,7 @@ export class AddDevicePage {
     }
     this.storage.set("Dispositivos", this.ListD);
     this._SubjectService.DevicesSubject.next(this.ListD);
+    this._SubjectService.TopicSubject.next(this.ListD);
     this.appCtrl.getRootNav().pop();
   }
 }

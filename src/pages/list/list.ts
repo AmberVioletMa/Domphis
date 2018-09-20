@@ -31,6 +31,8 @@ export class ListPage {
       this._SubjectService.TopicSubject.next(result);
     });
     this._SubjectService.DevicesSubject.subscribe(val => {
+      console.log(val);
+      if( !val ){ val = [] }
       this.ListaDeDispositivos = val;
       this._SubjectService.Devices = val;
       this.MQTT.reConnect();
