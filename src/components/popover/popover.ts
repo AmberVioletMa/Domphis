@@ -96,7 +96,7 @@ export class PopoverComponent {
   HideAlert() {
     let Device = this.navParams.get("Device");
     let alert = this.alertCtrl.create({
-      title: "Specify the reason",
+      title: "Hide Devices",
       inputs: [
         {
           type: "checkbox",
