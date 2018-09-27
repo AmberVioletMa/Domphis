@@ -18,6 +18,7 @@ export class AddDevicePage {
   Device4img = "assets/imgs/NOIMG.png";
   Device5img = "assets/imgs/NOIMG.png";
   Device6img = "assets/imgs/NOIMG.png";
+  Edit=false;
 
   constructor(
     public navCtrl: NavController,
@@ -47,6 +48,7 @@ export class AddDevicePage {
     else this.ListD=[];
     let DeviceParam = this.navParams.get("Device");
     if(DeviceParam){
+      this.Edit=true;
       this.formDevice.setValue({
       GroupName: DeviceParam.GroupName,
       TopicID: DeviceParam.TopicID,
@@ -152,6 +154,7 @@ export class AddDevicePage {
   saveDevice() {
     const FormaSub = {
       GroupName: this.formDevice.get("GroupName").value,
+      Hide:false,
       TopicID: this.formDevice.get("TopicID").value,
       Dispositivos: [
         {

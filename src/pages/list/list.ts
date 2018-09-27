@@ -53,4 +53,8 @@ export class ListPage {
       ev: myEvent
     });
   }
+
+  saveToDB(lista){
+    this.storage.set("Dispositivos", lista);
+  }
 }

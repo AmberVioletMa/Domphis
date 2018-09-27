@@ -91,6 +91,7 @@
               </div>
             </div>
             <p *ngIf="Device6IsInvalid" class="alert">The Device must have a Name</p>
-            <button ion-button full color='Violet' (click)='saveDevice();' [disabled]='!Complete'>Add Device</button>
+            <button ion-button full color='Violet' *ngIf='!Edit' (click)='saveDevice();' [disabled]='!Complete'>Add Device</button>
+            <button ion-button full color='Violet' *ngIf='Edit' (click)='saveDevice();' [disabled]='!Complete'>Edit Device</button>
   </form>
 </ion-content>

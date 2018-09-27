@@ -33,7 +33,14 @@ const char* password = "3028042214";
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 const char* Topic = "AmberTopicRoomTopic92";
 char* payloadArray;
-char* state;
+String state;
+String msgToSend;
+int Device1 = 5;//D1
+int Device2 = 4;//D2
+int Device3 = 0;//D3
+int Device4 = 2;//D4
+int Device5 = 14;//D5
+int Device6 = 12;//D6
 
 WiFiClient espClient;
 PubSubClient client(espClient);
@@ -64,24 +71,56 @@ void setup_wifi() {
   Serial.println(WiFi.localIP());
 }
 
+void updatePlaseVoid(){
+  msgToSend = (String)"UpdateDevices" + (String)"," + Topic + (String)"," + (digitalRead(Device1)==HIGH) + (String)"," + (digitalRead(Device2)==HIGH) + (String)"," + (digitalRead(Device3)==HIGH) + (String)"," 
+  + (digitalRead(Device4)==HIGH) + (String)"," + (digitalRead(Device5)==HIGH) + (String)"," + (digitalRead(Device6)==HIGH);
+  char * tab2 = new char [msgToSend.length()+1];
+strcpy (tab2, msgToSend.c_str());
+  client.publish(Topic, tab2);
+}
+
 void callback(char* topic, byte* payload, unsigned int length) {
+  payload[length] = '\0';
   Serial.print("Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
   Serial.print((char*)payload);
   Serial.println();
   payloadArray = strtok ((char*)payload,",");
-  if( strstr("UpdatePlease",payloadArray)){ 
+  if(strcmp(payloadArray,"UpdatePlease")==0){ 
       updatePlaseVoid();
     }
-  if(strstr("Device1",payloadArray)){ 
+  if((String)"Device1" == payloadArray){ 
       state = strtok(NULL, ",");
-      if (strstr("false",state)){Serial.println("false");}
-      if (strstr("truee",state)){Serial.println("true");}
-      Serial.println(state);
+      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device1,LOW);}
+      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device1,HIGH);}
+    }
+  if((String)"Device2" == payloadArray){ 
+      state = strtok(NULL, ",");
+      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device2,LOW);}
+      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device2,HIGH);}
+    }
+  if((String)"Device3" == payloadArray){ 
+      state = strtok(NULL, ",");
+      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device3,LOW);}
+      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device3,HIGH);}
+    }
+  if((String)"Device4" == payloadArray){ 
+      state = strtok(NULL, ",");
+      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device4,LOW);}
+      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device4,HIGH);}
+    }
+  if((String)"Device5" == payloadArray){ 
+      state = strtok(NULL, ",");
+      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device5,LOW);}
+      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device5,HIGH);}
+    }
+  if((String)"Device6" == payloadArray){ 
+      state = strtok(NULL, ",");
+      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device6,LOW);}
+      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device6,HIGH);}
     }
 }
-
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
@@ -93,7 +132,6 @@ void reconnect() {
     if (client.connect(clientId.c_str())) {
       Serial.println("connected");
       // Once connected, publish an announcement...
-      //client.publish(Topic, "hello world");
       // ... and resubscribe
       client.subscribe(Topic);
     } else {
@@ -112,6 +150,18 @@ void setup() {
   setup_wifi();
   client.setServer(mqtt_server, 1883);
   client.setCallback(callback);
+  pinMode(Device1, OUTPUT);
+  pinMode(Device2, OUTPUT);
+  pinMode(Device3, OUTPUT);
+  pinMode(Device4, OUTPUT);
+  pinMode(Device5, OUTPUT);
+  pinMode(Device6, OUTPUT);
+  digitalWrite(Device1,LOW);
+  digitalWrite(Device2,LOW);
+  digitalWrite(Device3,LOW);
+  digitalWrite(Device4,LOW);
+  digitalWrite(Device5,LOW);
+  digitalWrite(Device6,LOW);
 }
 
 void loop() {
@@ -121,8 +171,4 @@ void loop() {
   }
   client.loop();
 
-}
-
-void updatePlaseVoid(){
-  Serial.println(payloadArray);
 }
