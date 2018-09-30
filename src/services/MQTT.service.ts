@@ -20,7 +20,7 @@ export class MQTTService  {
 
   private onInitVoid(){
         // Create a client instance
-        this.client = new Paho.MQTT.Client("broker.mqttdashboard.com", Number(8000), "/mqtt", "clientId");
+        this.client = new Paho.MQTT.Client("broker.mqttdashboard.com", Number(8000), "/mqtt", Math.random().toString(36).slice(2));
 
         // set callback handlers
         this.client.onConnectionLost = this.onConnectionLost.bind(this);

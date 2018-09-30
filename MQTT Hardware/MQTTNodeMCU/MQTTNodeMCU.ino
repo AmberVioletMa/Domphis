@@ -87,38 +87,48 @@ void callback(char* topic, byte* payload, unsigned int length) {
   Serial.print((char*)payload);
   Serial.println();
   payloadArray = strtok ((char*)payload,",");
-  if(strcmp(payloadArray,"UpdatePlease")==0){ 
+  if((String)"UpdatePlease"== payloadArray){ 
+      updatePlaseVoid();
+    }
+   if((String)"TurnOffAll"== payloadArray){ 
+      digitalWrite(Device1,LOW);
+      digitalWrite(Device2,LOW);
+      digitalWrite(Device3,LOW);
+      digitalWrite(Device4,LOW);
+      digitalWrite(Device5,LOW);
+      digitalWrite(Device6,LOW);
       updatePlaseVoid();
     }
   if((String)"Device1" == payloadArray){ 
       state = strtok(NULL, ",");
-      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device1,LOW);}
-      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device1,HIGH);}
+      Serial.println(state);
+      if ((String)"false" == state){Serial.println("false");digitalWrite(Device1,LOW);}
+      if ((String)"true" == state){Serial.println("true");digitalWrite(Device1,HIGH);}
     }
   if((String)"Device2" == payloadArray){ 
       state = strtok(NULL, ",");
-      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device2,LOW);}
-      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device2,HIGH);}
+      if ((String)"false" == state){Serial.println("false");digitalWrite(Device2,LOW);}
+      if ((String)"true" == state){Serial.println("true");digitalWrite(Device2,HIGH);}
     }
   if((String)"Device3" == payloadArray){ 
       state = strtok(NULL, ",");
-      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device3,LOW);}
-      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device3,HIGH);}
+      if ((String)"false" == state){Serial.println("false");digitalWrite(Device3,LOW);}
+      if ((String)"true" == state){Serial.println("true");digitalWrite(Device3,HIGH);}
     }
   if((String)"Device4" == payloadArray){ 
       state = strtok(NULL, ",");
-      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device4,LOW);}
-      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device4,HIGH);}
+      if ((String)"false" == state){Serial.println("false");digitalWrite(Device4,LOW);}
+      if ((String)"true" == state){Serial.println("true");digitalWrite(Device4,HIGH);}
     }
   if((String)"Device5" == payloadArray){ 
       state = strtok(NULL, ",");
-      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device5,LOW);}
-      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device5,HIGH);}
+      if ((String)"false" == state){Serial.println("false");digitalWrite(Device5,LOW);}
+      if ((String)"true" == state){Serial.println("true");digitalWrite(Device5,HIGH);}
     }
   if((String)"Device6" == payloadArray){ 
       state = strtok(NULL, ",");
-      if ((String)"f" == state.substring(0,1)){Serial.println("false");digitalWrite(Device6,LOW);}
-      if ((String)"t" == state.substring(0,1)){Serial.println("true");digitalWrite(Device6,HIGH);}
+      if ((String)"false" == state){Serial.println("false");digitalWrite(Device6,LOW);}
+      if ((String)"true" == state){Serial.println("true");digitalWrite(Device6,HIGH);}
     }
 }
 void reconnect() {
